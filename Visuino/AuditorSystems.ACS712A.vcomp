@@ -1,0 +1,80 @@
+AuditorSystems
+//-----
+ 
+
+  [ArduinoInclude( 'AuditorSystems_ACS712A.h' )]
+  [ArduinoInclude( 'ACS712.h')]
+  [ArduinoClass( 'AuditorSystems::ACS712A' )]
+   [CreateName( 'ACS712A' )]
+  [Name( 'ACS712 Current' )]
+  [Category( TArduinoAuditorSystems )]
+  [ArduinoExcludeUnconnected]
+  [ArduinoStart]
+  [ArduinoInit]
+  [ArduinoLoopBegin]
+   
+    +TArduinoAuditorSystemsACS712A : TArduinoClockedEnableComponent//TArduinoClockedEnableFlexibleI2CComponent
+
+    [ArduinoPinNonConnectedAddEntry( ceInit )]
+	[ArduinoPinNonConnectedAddEntry( ceLoopBegin )]
+    [ArduinoDirectCallPinTemplate( True )]
+    ClockInputPin
+     
+    //[DesignRange( $40, $4F )]
+    //Address = $40    
+	[OWPrimaryPin]
+	calibrate : TOWArduinoClockSinkPin
+	[OWPrimaryPin]
+	[ArduinoChangeOnlyPin]
+    [OWPinListPrimaryPinType( TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Current', TOWArduinoAnalogFlexibleSourcePin )]
+	ACS712OutputPins : TOWArduinoPinList
+	
+   
+	
+	[OWExcludeBindings] // Remove to get Sink Pin
+    autocalibrate : Boolean = True
+	
+	[OWExcludeBindings] // Remove to get Sink Pin
+	in_mA : Boolean = False
+	
+	[OWExcludeBindings] // Remove to get Sink Pin
+	[ValueRange(1, 255 )]
+	ADC_PIN : Unsigned = 18
+	
+	[OWExcludeBindings] // Remove to get Sink Pin
+	[ValueRange(0, 6 )]
+    ADC_REF : Single = 5.0
+	[OWExcludeBindings]
+	[PropertyFixedListDesign]
+    [PropertyListDesignValue( '66' )]
+	[PropertyListDesignValue( '100' )]
+	[PropertyListDesignValue( '185' )]
+	[ValueRange(0, 185 )]
+    Sensitivity : Unsigned = 66
+	
+	[OWExcludeBindings]
+	[PropertyFixedListDesign]
+    [PropertyListDesignValue( '256' )]
+	[PropertyListDesignValue( '512' )]
+	[PropertyListDesignValue( '1024' )]
+	[PropertyListDesignValue( '2048' )]
+	[PropertyListDesignValue( '4096' )]
+	[ValueRange(0, 4096 )]
+    ADC_RES : Unsigned = 1024
+	  
+	
+	
+	
+	
+	
+	
+	
+		
+	
+   
+   	;
+//-----
+
+	
+;

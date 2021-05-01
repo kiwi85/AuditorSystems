@@ -1,0 +1,58 @@
+AuditorSystems
+//-----
+  [ArduinoInclude( 'AuditorSystems_Stepper.h' )]
+    [ArduinoInclude( 'ESP_FlexyStepper.h' )]
+  [ArduinoClass( 'AuditorSystems::Stepper' )]
+  [CreateName( 'Stepper' )]
+  [Name( 'Stepper Driver' )]
+  [Category( TArduinoAuditorSystems )]
+  [ArduinoInit]
+  [ArduinoLoopBegin]
+  +TArduinoAuditorSystemsStepper : TArduinoEnableComponent
+    
+	[OWPrimaryPin]
+	ESTOP : TOWArduinoDigitalSinkPin
+	
+	[OWPrimaryPin]
+	STEP : TOWArduinoClockSinkPin
+ 
+	
+	[ValueRange(0, 10000 )]
+    ACCELERATION_STEPS_PER_S : Integer = 500
+		
+	[ValueRange(-10000, 10000 )]
+	DISTANCE_IN_STEPS : Integer = 500
+	
+	[ValueRange(0, 10000 )]
+    SPEED : Integer = 800
+
+	[ValueRange(0, 10000 )]
+    DECELERATION_STEPS_PER_S : Integer = 500
+	
+	[OWExcludeBindings] // Remove to get Sink Pin
+	[ValueRange(0, 100 )]
+    MOTOR_STEP_PIN : Integer = 18
+	
+	[OWExcludeBindings] // Remove to get Sink Pin
+	[ValueRange(0, 100 )]
+    MOTOR_DIRECTION_PIN : Integer = 19
+	
+	[OWExcludeBindings] // Remove to get Sink Pin
+	[ValueRange(0, 100 )]
+    MOTOR_EN_PIN : Integer = 1
+	[OWExcludeBindings] // Remove to get Sink Pin
+	ESTOP_HIGH_LOW : Boolean = False
+	[OWPrimaryPin]
+    [OWPinListPrimaryPinType( TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'PositionInSteps', TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'DistanceToTarget', TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'motionComplete', TOWArduinoDigitalFlexibleSourcePin)]
+	StepperOutputPins : TOWArduinoPinList
+
+	
+		
+	
+   
+   	;
+//-----
+;

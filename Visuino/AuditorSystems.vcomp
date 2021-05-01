@@ -1,0 +1,8 @@
+AuditorSystems
+//-----
+  [Name('AuditorSystems')]
+  [ArduinoInclude( 'AuditorSystems' )]
+  TArduinoAuditorSystems : TClassCategory
+  ;
+//-----
+;

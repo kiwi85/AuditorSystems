@@ -1,0 +1,583 @@
+{
+  "Config": {
+    "Build": {
+      "Board": "esp32:esp32:esp32:PSRAM=disabled,PartitionScheme=default,CPUFreq=240,FlashMode=qio,FlashFreq=80,FlashSize=4M,UploadSpeed=921600,DebugLevel=none"
+    }
+  },
+  "Version": "2",
+  "Product": "Visuino Pro - Visual Arduino Programming",
+  "Content": "OpenWire Diagram",
+  "Units": [
+    {
+      "Name": "__OpenWireRootUnit__",
+      "*": [
+        {
+          "X": 1264,
+          "Name": "Arduino",
+          "Instance": {
+            "Serial": {
+              "*": [
+                {
+                  "InputPin": {
+                    "SourcePins": [
+                      {
+                        "ID": "__OpenWireRootUnit__.FormattedText1.OutputPin"
+                      }
+                    ]
+                  },
+                  "OutputPin": {
+                    "SinkPins": [
+                      {
+                        "ID": "__OpenWireRootUnit__.CharToText1.InputPin"
+                      }
+                    ]
+                  },
+                  "+": "TArduinoHardwareSerial"
+                },
+                {
+                  "+": "TArduinoESP32DefinedPinsSerial1"
+                },
+                {
+                  "+": "TArduinoESP32DefinedPinsSerial2"
+                }
+              ]
+            },
+            "+": "TArduinoBoard",
+            "Modules": {
+              "*": [
+                {
+                  "+": "TArduinoESP32WiFiModule"
+                },
+                {
+                  "+": "TArduinoEEPROMModule"
+                },
+                {
+                  "+": "TArduinoESP32ProcessorModule"
+                },
+                {
+                  "+": "TArduinoESP32HallSensorModule"
+                },
+                {
+                  "+": "TArduinoESP32BluetoothLEModule"
+                }
+              ]
+            },
+            "I2CChannels": {
+              "*": [
+                {
+                  "+": "TArduinoESP32_Generic_I2C"
+                },
+                {
+                  "+": "TArduinoESP32_Generic_I2C_2"
+                }
+              ]
+            },
+            "Digital": {
+              "*": [
+                {
+                  "+": "TArduinoCombinedTouchPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedPullDownAnalogDigitalSerial0Channel"
+                },
+                {
+                  "+": "TArduinoCombinedTouchPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedPullDownAnalogDigitalSerial0Channel"
+                },
+                {
+                  "+": "TArduinoCombinedTouchPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedTouchPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedTouchPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedTouchPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedTouchPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedTouchPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedTouchPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedTouchPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoESP32CombinedPullDownAnalogDigitalDACChannel"
+                },
+                {
+                  "+": "TArduinoESP32CombinedPullDownAnalogDigitalDACChannel"
+                },
+                {
+                  "+": "TArduinoCombinedTouchPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedTouchPullDownAnalogDigitalChannel"
+                },
+                {
+                  "+": "TArduinoCombinedTouchPullDownAnalogDigitalChannel"
+                },
+                {
+                  "OutputPin": {
+                    "SinkPins": [
+                      {
+                        "ID": "__OpenWireRootUnit__.Stepper2.ESTOP"
+                      }
+                    ]
+                  },
+                  "+": "TArduinoPullDownTouchAnalogInputOnlyChannel"
+                },
+                {
+                  "OutputPin": {
+                    "SinkPins": [
+                      {
+                        "ID": "__OpenWireRootUnit__.Stepper1.ESTOP"
+                      }
+                    ]
+                  },
+                  "+": "TArduinoPullDownTouchAnalogInputOnlyChannel"
+                },
+                {
+                  "+": "TArduinoPullDownTouchAnalogInputOnlyChannel"
+                },
+                {
+                  "+": "TArduinoPullDownTouchAnalogInputOnlyChannel"
+                }
+              ]
+            },
+            "SPIChannels": {
+              "*": [
+                {
+                  "+": "TArduinoESP32_Generic_SPI"
+                },
+                {
+                  "+": "TArduinoESP32_Generic_SPI1"
+                }
+              ]
+            },
+            "BoardType": "ESP32 Development Board"
+          },
+          "Type": "Component",
+          "Y": 256
+        },
+        {
+          "X": 448,
+          "Name": "Stepper1",
+          "Instance": {
+            "StepperOutputPins": {
+              "Pins": [
+                {
+                  "Type": "ptSource",
+                  "SinkPins": [
+                    {
+                      "ID": "__OpenWireRootUnit__.ChangeOnly1.InputPin"
+                    }
+                  ]
+                },
+                {
+                  "Type": "ptSource"
+                },
+                {
+                  "Type": "ptSource",
+                  "SinkPins": [
+                    {
+                      "ID": "__OpenWireRootUnit__.ChangeOnly2.InputPin"
+                    }
+                  ]
+                }
+              ],
+              "Count": 3,
+              "Form": "__OpenWireRootUnit__"
+            },
+            "@": [
+              {
+                "PinName": "DISTANCE_IN_STEPS",
+                "@": "DISTANCE_IN_STEPS",
+                "+": "TOWIntegerSinkPinBinding",
+                "SourcePin": {
+                  "ID": "__OpenWireRootUnit__.TextToInteger1.OutputPin"
+                },
+                "Component": "Stepper1"
+              }
+            ],
+            "+": "AuditorSystems.TArduinoAuditorSystemsStepper",
+            "DECELERATION_STEPS_PER_S": 5000,
+            "ESTOP": {
+              "SourcePin": {
+                "Name": "__OpenWireRootUnit__.Arduino.Digital[29].OutputPin",
+                "ID": "__OpenWireRootUnit__.Arduino.Digital._Item29.OutputPin"
+              }
+            },
+            "ACCELERATION_STEPS_PER_S": 50,
+            "ESTOP_HIGH_LOW": true,
+            "STEP": {
+              "SourcePins": [
+                {
+                  "ID": "__OpenWireRootUnit__.ClockGenerator1.OutputPin"
+                }
+              ]
+            }
+          },
+          "Type": "Component",
+          "Y": 576
+        },
+        {
+          "X": 256,
+          "Name": "ClockGenerator1",
+          "Instance": {
+            "Frequency": 0.200000002980232,
+            "OutputPin": {
+              "SinkPins": [
+                {
+                  "ID": "__OpenWireRootUnit__.Stepper1.STEP"
+                },
+                {
+                  "ID": "__OpenWireRootUnit__.Stepper2.STEP"
+                }
+              ]
+            },
+            "+": "TArduinoClockGenerator"
+          },
+          "Type": "Component",
+          "Y": 656
+        },
+        {
+          "X": 1568,
+          "Name": "CharToText1",
+          "Instance": {
+            "InputPin": {
+              "SourcePin": {
+                "Name": "__OpenWireRootUnit__.Arduino.Serial[0].OutputPin",
+                "ID": "__OpenWireRootUnit__.Arduino.Serial._Item0.OutputPin"
+              }
+            },
+            "OutputPin": {
+              "SinkPins": [
+                {
+                  "ID": "__OpenWireRootUnit__.TextToInteger1.InputPin"
+                }
+              ]
+            },
+            "+": "TArduinoCharToText"
+          },
+          "Type": "Component",
+          "Y": 304
+        },
+        {
+          "X": 1664,
+          "Name": "TextToInteger1",
+          "Instance": {
+            "OutputPin": {
+              "SinkPins": [
+                {
+                  "Name": "__OpenWireRootUnit__.Stepper1.DISTANCE_IN_STEPS",
+                  "ID": "__OpenWireRootUnit__.Stepper1.DISTANCE_IN_STEPSInputPin"
+                },
+                {
+                  "Name": "__OpenWireRootUnit__.Stepper2.DISTANCE_IN_STEPS",
+                  "ID": "__OpenWireRootUnit__.Stepper2.DISTANCE_IN_STEPSInputPin"
+                }
+              ]
+            },
+            "InputPin": {
+              "SourcePin": {
+                "ID": "__OpenWireRootUnit__.CharToText1.OutputPin"
+              }
+            },
+            "+": "TArduinoTextToInteger"
+          },
+          "Type": "Component",
+          "Y": 272
+        },
+        {
+          "X": 752,
+          "Name": "ChangeOnly2",
+          "Instance": {
+            "InputPin": {
+              "SourcePin": {
+                "Name": "__OpenWireRootUnit__.Stepper1.StepperOutputPins.motionComplete",
+                "ID": "__OpenWireRootUnit__.Stepper1.StepperOutputPins._Pin2"
+              }
+            },
+            "OutputPin": {
+              "SinkPins": [
+                {
+                  "ID": "__OpenWireRootUnit__.FormattedText1.ClockInputPin"
+                },
+                {
+                  "Name": "__OpenWireRootUnit__.FormattedText1.Elements.DigitalElement.InputPin",
+                  "ID": "__OpenWireRootUnit__.FormattedText1.Elements._Item1.InputPin"
+                }
+              ]
+            },
+            "+": "TArduinoDigitalChangeOnly"
+          },
+          "Type": "Component",
+          "Y": 640
+        },
+        {
+          "X": 752,
+          "Name": "ChangeOnly1",
+          "Instance": {
+            "InputPin": {
+              "SourcePin": {
+                "Name": "__OpenWireRootUnit__.Stepper1.StepperOutputPins.PositionInSteps",
+                "ID": "__OpenWireRootUnit__.Stepper1.StepperOutputPins._Pin0"
+              }
+            },
+            "OutputPin": {
+              "SinkPins": [
+                {
+                  "ID": "__OpenWireRootUnit__.FormattedText1.ClockInputPin"
+                },
+                {
+                  "Name": "__OpenWireRootUnit__.FormattedText1.Elements.AnalogElement.InputPin",
+                  "ID": "__OpenWireRootUnit__.FormattedText1.Elements._Item0.InputPin"
+                }
+              ]
+            },
+            "+": "TArduinoAnalogChangeOnly"
+          },
+          "Type": "Component",
+          "Y": 592
+        },
+        {
+          "X": 448,
+          "Name": "Stepper2",
+          "Instance": {
+            "MOTOR_DIRECTION_PIN": 3,
+            "StepperOutputPins": {
+              "Pins": [
+                {
+                  "Type": "ptSource",
+                  "SinkPins": [
+                    {
+                      "ID": "__OpenWireRootUnit__.ChangeOnly4.InputPin"
+                    }
+                  ]
+                },
+                {
+                  "Type": "ptSource"
+                },
+                {
+                  "Type": "ptSource",
+                  "SinkPins": [
+                    {
+                      "ID": "__OpenWireRootUnit__.ChangeOnly3.InputPin"
+                    }
+                  ]
+                }
+              ],
+              "Count": 3,
+              "Form": "__OpenWireRootUnit__"
+            },
+            "+": "AuditorSystems.TArduinoAuditorSystemsStepper",
+            "@": [
+              {
+                "PinName": "DISTANCE_IN_STEPS",
+                "@": "DISTANCE_IN_STEPS",
+                "+": "TOWIntegerSinkPinBinding",
+                "SourcePin": {
+                  "ID": "__OpenWireRootUnit__.TextToInteger1.OutputPin"
+                },
+                "Component": "Stepper2"
+              }
+            ],
+            "DECELERATION_STEPS_PER_S": 3500,
+            "ESTOP": {
+              "SourcePin": {
+                "Name": "__OpenWireRootUnit__.Arduino.Digital[28].OutputPin",
+                "ID": "__OpenWireRootUnit__.Arduino.Digital._Item28.OutputPin"
+              }
+            },
+            "ACCELERATION_STEPS_PER_S": 50,
+            "MOTOR_STEP_PIN": 4,
+            "ESTOP_HIGH_LOW": true,
+            "STEP": {
+              "SourcePins": [
+                {
+                  "ID": "__OpenWireRootUnit__.ClockGenerator1.OutputPin"
+                }
+              ]
+            }
+          },
+          "Type": "Component",
+          "Y": 688
+        },
+        {
+          "X": 752,
+          "Name": "ChangeOnly3",
+          "Instance": {
+            "InputPin": {
+              "SourcePin": {
+                "Name": "__OpenWireRootUnit__.Stepper2.StepperOutputPins.motionComplete",
+                "ID": "__OpenWireRootUnit__.Stepper2.StepperOutputPins._Pin2"
+              }
+            },
+            "OutputPin": {
+              "SinkPins": [
+                {
+                  "ID": "__OpenWireRootUnit__.FormattedText1.ClockInputPin"
+                },
+                {
+                  "Name": "__OpenWireRootUnit__.FormattedText1.Elements.DigitalElement.InputPin",
+                  "ID": "__OpenWireRootUnit__.FormattedText1.Elements._Item3.InputPin"
+                }
+              ]
+            },
+            "+": "TArduinoDigitalChangeOnly"
+          },
+          "Type": "Component",
+          "Y": 752
+        },
+        {
+          "X": 752,
+          "Name": "ChangeOnly4",
+          "Instance": {
+            "InputPin": {
+              "SourcePin": {
+                "Name": "__OpenWireRootUnit__.Stepper2.StepperOutputPins.PositionInSteps",
+                "ID": "__OpenWireRootUnit__.Stepper2.StepperOutputPins._Pin0"
+              }
+            },
+            "OutputPin": {
+              "SinkPins": [
+                {
+                  "ID": "__OpenWireRootUnit__.FormattedText1.ClockInputPin"
+                },
+                {
+                  "Name": "__OpenWireRootUnit__.FormattedText1.Elements.AnalogElement.InputPin",
+                  "ID": "__OpenWireRootUnit__.FormattedText1.Elements._Item2.InputPin"
+                }
+              ]
+            },
+            "+": "TArduinoAnalogChangeOnly"
+          },
+          "Type": "Component",
+          "Y": 704
+        },
+        {
+          "X": 1008,
+          "Name": "FormattedText1",
+          "Instance": {
+            "ClockInputPin": {
+              "SourcePins": [
+                {
+                  "ID": "__OpenWireRootUnit__.ChangeOnly2.OutputPin"
+                },
+                {
+                  "ID": "__OpenWireRootUnit__.ChangeOnly1.OutputPin"
+                },
+                {
+                  "ID": "__OpenWireRootUnit__.ChangeOnly3.OutputPin"
+                },
+                {
+                  "ID": "__OpenWireRootUnit__.ChangeOnly4.OutputPin"
+                }
+              ]
+            },
+            "Text": "Stepper1_pos: %0 | Stepper1_status: %1\r\nStepper2_pos: %2 | Stepper2_status: %3",
+            "OutputPin": {
+              "SinkPins": [
+                {
+                  "Name": "__OpenWireRootUnit__.Arduino.Serial.Serial[ 0 ].InputPin",
+                  "ID": "__OpenWireRootUnit__.Arduino.Serial._Item0.InputPin"
+                }
+              ]
+            },
+            "+": "TArduinoFormattedText",
+            "Elements": {
+              "*": [
+                {
+                  "Name": "AnalogElement1",
+                  "InputPin": {
+                    "SourcePin": {
+                      "ID": "__OpenWireRootUnit__.ChangeOnly1.OutputPin"
+                    }
+                  },
+                  "+": "TArduinoFormattedTextElementAnalog"
+                },
+                {
+                  "Name": "DigitalElement1",
+                  "InputPin": {
+                    "SourcePin": {
+                      "ID": "__OpenWireRootUnit__.ChangeOnly2.OutputPin"
+                    }
+                  },
+                  "+": "TArduinoFormattedTextElementDigital",
+                  "InitialValue": false
+                },
+                {
+                  "Name": "AnalogElement1",
+                  "InputPin": {
+                    "SourcePin": {
+                      "ID": "__OpenWireRootUnit__.ChangeOnly4.OutputPin"
+                    }
+                  },
+                  "+": "TArduinoFormattedTextElementAnalog"
+                },
+                {
+                  "Name": "DigitalElement1",
+                  "InputPin": {
+                    "SourcePin": {
+                      "ID": "__OpenWireRootUnit__.ChangeOnly3.OutputPin"
+                    }
+                  },
+                  "+": "TArduinoFormattedTextElementDigital",
+                  "InitialValue": false
+                }
+              ]
+            }
+          },
+          "Type": "Component",
+          "Y": 576
+        }
+      ],
+      "Type": "Diagram",
+      "Selection": [
+        "FormattedText1"
+      ]
+    }
+  ]
+}

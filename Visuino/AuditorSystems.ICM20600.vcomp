@@ -1,0 +1,52 @@
+AuditorSystems
+//-----
+ 
+
+  [ArduinoInclude( 'AuditorSystems_ICM20600.h' )]
+   //[ArduinoInclude( 'Beastdevices_INA3221.h','Beastdevices_INA3221','INA3221 needs to be installed via library manager: https://github.com/beast-devices/Arduino-INA3221')]
+  [ArduinoClass( 'AuditorSystems::ICM20600' )]
+   [CreateName( 'ICM2060' )]
+  [Name( 'ICM2060 Gyro, Accel Sensor' )]
+  [Category( TArduinoAuditorSystems )]
+  [ArduinoExcludeUnconnected]
+  [ArduinoStart]
+  [ArduinoLoopBegin]
+   
+    +TArduinoAuditorSystemsICM20600 : TArduinoClockedEnableComponent
+
+   
+    [ArduinoDirectCallPinTemplate( True )]
+    ClockInputPin
+     
+    
+	[OWPrimaryPin]
+    [OWPinListPrimaryPinType( TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Gyro X', TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Gyro Y', TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Gyro Z', TOWArduinoAnalogFlexibleSourcePin )]
+	GyroOutputPins : TOWArduinoPinList
+	[OWPrimaryPin]
+    [OWPinListPrimaryPinType( TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Accel X', TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Accel Y', TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Accel Z', TOWArduinoAnalogFlexibleSourcePin )]
+	AccelOutputPins : TOWArduinoPinList
+	[OWPrimaryPin]
+   
+	TemperatureOutputPin : TOWArduinoAnalogFlexibleSourcePin
+	
+	[OWExcludeBindings] // Remove to get Sink Pin
+	[DesignRange( 0, 255 )]
+    Address: Unsigned =68//0x401   
+	
+
+	
+	
+		
+	
+   
+   	;
+//-----
+
+	
+;

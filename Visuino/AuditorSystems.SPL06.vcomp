@@ -1,0 +1,44 @@
+AuditorSystems
+//-----
+ 
+
+  [ArduinoInclude( 'AuditorSystems_SPL06.h' )]
+   [ArduinoClass( 'AuditorSystems::SPL06' )]
+   [CreateName( 'SPL06' )]
+  [Name( 'SPL06 Pressure' )]
+  [Category( TArduinoAuditorSystems )]
+  [ArduinoExcludeUnconnected]
+  [ArduinoStart]
+  [ArduinoLoopBegin]
+   [ArduinoPinNonConnectedAddEntry( ceLoopBegin )]
+    +TArduinoAuditorSystemsSPL06 : TArduinoClockedEnableFlexibleI2CComponent
+
+   [ArduinoDirectCallPinTemplate( True )]
+    ClockInputPin
+      
+    [DesignRange( $40, $4F )]
+    Address = $40
+	[OWPrimaryPin]
+	[OWPinListPrimaryPinType( TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Altitude', TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Pressure', TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Temperature', TOWArduinoAnalogFlexibleSourcePin )]
+	OutputPins : TOWArduinoPinList
+	
+	
+	
+	
+	[OWExcludeBindings] // Remove to get Sink Pin
+    local_pressure : Single = 1011.1
+	
+	
+	
+	
+		
+	
+   
+   	;
+//-----
+
+	
+;

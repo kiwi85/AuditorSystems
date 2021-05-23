@@ -73,11 +73,12 @@ namespace AuditorSystems
 	public:
 		_V_PIN_( StepperOutputPinsPositionInSteps )
 	
-	protected:
+	public:
 
 		bool emergencySwitchTriggered = 0;
 		//int distance_in_steps=DISTANCE_IN_STEPS();
 		ESP_FlexyStepper stepper;
+
 	protected:
 		void stepper_init()
 		{
@@ -116,7 +117,22 @@ namespace AuditorSystems
 			}
 				
 		}
+		void ACCELERATION_STEPS_PER_S_o_Receive(void *_Data)
+		{
+			stepper.setAccelerationInStepsPerSecondPerSecond(*( int *)_Data);
 			
+		}
+		void DECELERATION_STEPS_PER_S_o_Receive(void *_Data)
+		{
+			stepper.setAccelerationInStepsPerSecondPerSecond(*( int *)_Data);
+			
+		}		
+		void SPEED_o_Receive(void *_Data)
+		{
+			stepper.setSpeedInStepsPerSecond((*( int *)_Data));
+			
+		}
+		
 	public:
 		inline void SystemLoopBegin()
 		{

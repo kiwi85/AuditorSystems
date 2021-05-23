@@ -6,6 +6,7 @@ AuditorSystems.h
 
 #ifndef _AUDITORSYSTEMS_h
 #define _AUDITORSYSTEMS_h
+
 namespace AuditorSystems
 {
 //---------------------------

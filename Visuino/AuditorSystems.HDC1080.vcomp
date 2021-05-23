@@ -1,0 +1,43 @@
+AuditorSystems
+//-----
+ 
+
+  [ArduinoInclude( 'AuditorSystems_HDC1080.h' )]
+  [ArduinoClass( 'AuditorSystems::HDC1080' )]
+   [CreateName( 'HDC1080' )]
+  [Name( 'HDC1080 Humidity' )]
+  [Category( TArduinoAuditorSystems )]
+  [ArduinoExcludeUnconnected]
+  [ArduinoStart]
+  [ArduinoLoopBegin]
+   
+    +TArduinoAuditorSystemsHDC1080 : TArduinoClockedEnableComponent
+
+   
+    [ArduinoDirectCallPinTemplate( True )]
+    ClockInputPin
+     
+    
+	[OWPrimaryPin]
+    [OWPinListPrimaryPinType( TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Humidity', TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Temperature', TOWArduinoAnalogFlexibleSourcePin )]
+	HDC1080OutputPins : TOWArduinoPinList
+	
+	[OWExcludeBindings] // Remove to get Sink Pin
+	[DesignRange( 0, 255 )]
+    Address: Unsigned =64//0x40    
+	
+	
+	
+	
+	
+	
+		
+	
+   
+   	;
+//-----
+
+	
+;

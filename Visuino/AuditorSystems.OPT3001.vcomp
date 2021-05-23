@@ -1,0 +1,40 @@
+AuditorSystems
+//-----
+ 
+
+  [ArduinoInclude( 'AuditorSystems_OPT3001.h' )]
+  [ArduinoClass( 'AuditorSystems::OPT3001' )]
+   [CreateName( 'OPT3001' )]
+  [Name( 'OPT3001 lightsensor' )]
+  [Category( TArduinoAuditorSystems )]
+  //[ArduinoExcludeUnconnected]
+  [ArduinoStart]
+  [ArduinoLoopBegin]
+   [ArduinoPinNonConnectedAddEntry( ceLoopBegin )]
+    +TArduinoAuditorSystemsOPT3001 : TArduinoClockedEnableComponent
+    [ArduinoDirectCallPinTemplate( True )]
+    ClockInputPin
+     	    
+	[OWPrimaryPin]
+    [OWPinListPrimaryPinType( TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'illuminance', TOWArduinoAnalogFlexibleSourcePin )]
+	
+	OutputPins : TOWArduinoPinList
+	
+	[OWExcludeBindings] // Remove to get Sink Pin
+	[ValueRange( 0, 255 )]
+    Address: Unsigned =68//0x44    
+	
+	
+	
+	
+	
+	
+		
+	
+   
+   	;
+//-----
+
+	
+;

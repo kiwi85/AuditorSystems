@@ -1,0 +1,65 @@
+AuditorSystems
+//-----
+ 
+
+  [ArduinoInclude( 'AuditorSystems_INA3221.h' )]
+   //[ArduinoInclude( 'Beastdevices_INA3221.h','Beastdevices_INA3221','INA3221 needs to be installed via library manager: https://github.com/beast-devices/Arduino-INA3221')]
+  [ArduinoClass( 'AuditorSystems::INA3221' )]
+   [CreateName( 'INA3221' )]
+  [Name( 'INA3221 Current, Voltage Sensor' )]
+  [Category( TArduinoAuditorSystems )]
+  [ArduinoExcludeUnconnected]
+  [ArduinoStart]
+  [ArduinoLoopBegin]
+   
+    +TArduinoAuditorSystemsINA3221 : TArduinoClockedEnableComponent
+
+   
+    [ArduinoDirectCallPinTemplate( True )]
+    ClockInputPin
+     
+    
+	[OWPrimaryPin]
+    [OWPinListPrimaryPinType( TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Voltage', TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Current', TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Power', TOWArduinoAnalogFlexibleSourcePin )]
+	CH1OutputPins : TOWArduinoPinList
+	[OWPrimaryPin]
+    [OWPinListPrimaryPinType( TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Voltage', TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Current', TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Power', TOWArduinoAnalogFlexibleSourcePin )]
+	CH2OutputPins : TOWArduinoPinList
+	[OWPrimaryPin]
+    [OWPinListPrimaryPinType( TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Voltage', TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Current', TOWArduinoAnalogFlexibleSourcePin )]
+	[OWAddPin( 'Power', TOWArduinoAnalogFlexibleSourcePin )]
+	CH3OutputPins : TOWArduinoPinList
+	
+	[OWExcludeBindings] // Remove to get Sink Pin
+	[DesignRange( 0, 255 )]
+    Address: Unsigned =65//0x401   
+	
+	[OWExcludeBindings] // Remove to get Sink Pin
+	[DesignRange( 0, 255 )]
+    Shunt_CH1: Single =65//0x401   
+	
+	[OWExcludeBindings] // Remove to get Sink Pin
+	[DesignRange( 0, 255 )]
+    Shunt_CH2: Single =65//0x401   
+	
+	[OWExcludeBindings] // Remove to get Sink Pin
+	[DesignRange( 0, 255 )]
+    Shunt_CH3: Single =65//0x401   
+	
+	
+		
+	
+   
+   	;
+//-----
+
+	
+;

@@ -1,6 +1,11 @@
 AuditorSystems
 //-----
-
+	//TArduinoSOCApproximation : Enum
+	
+		//asigmoidal
+		//sigmoidal
+		//linear
+	//;
 
   [ArduinoInclude( 'AuditorSystems_SOC.h' )]
    [ArduinoClass( 'AuditorSystems::SOC' )]
@@ -10,26 +15,52 @@ AuditorSystems
   //[ArduinoExcludeUnconnected]
   [ArduinoStart]
   [ArduinoLoopBegin]
-   
+   	[ArduinoPinNonConnectedAddEntry( ceLoopBegin )]
     +TArduinoAuditorSystemsSOC : TArduinoEnableComponent
-	[ArduinoPinNonConnectedAddEntry( ceLoopBegin )]
-  [OWExcludeBindings]
-	[PropertyListDesignValue( '500' )]
+
+	
+   //[OWPrimaryPin]
+   
+	//[OWAddPin( 'SOC (%)', TOWArduinoIntegerSourcePin )]
+	//[OWAddPin( 'Capacity used (mAh)', TOWArduinoAnalogFlexibleSourcePin )]
+	//[OWAddPin( 'Capacity remain (mAh)', TOWArduinoAnalogFlexibleSourcePin )]
+	//[OWAddPin( 'SOH (%)', TOWArduinoAnalogFlexibleSourcePin )]
+	
+	[OWPrimaryPin]
+	[Name( 'SOC(%)' )]
+	Bat_SOC : TOWArduinoIntegerSourcePin 
+	[OWPrimaryPin]
+	[Name( 'Coulombs(mAh)' )]
+	Capacity_used : TOWArduinoAnalogSourcePin 
+	[OWPrimaryPin]
+	[Name( 'Capacity(mAh)' )]
+	Capacity_remain : TOWArduinoAnalogSourcePin 
+	[OWPrimaryPin]
+	[Name( 'SOH(%)' )]
+	Bat_SOH : TOWArduinoAnalogSourcePin 
+	 
+	[OWExcludeBindings]
+	[ValueRange(0, 2 )]
+	Approximation : Unsigned = 1
+	
+	[OWExcludeBindings]
+	[PropertyListDesignValue	( '500' )]
 	[PropertyListDesignValue( '750' )]
 	[PropertyListDesignValue( '1000' )]
 	[PropertyListDesignValue( '2200' )]
 	[PropertyListDesignValue( '3600' )]
 	[ValueRange(1, 100000 )]
     Capacity : Integer = 500
-	 
+	
 	[OWExcludeBindings]
-	[PropertyFixedListDesign]
-	[PropertyListDesignValue( 'Li-Ion' )]
-	[PropertyListDesignValue( 'NiCd' )]
-	Battery_Type : String = Li-Ion
+	[ValueRange(1, 100 )]
+	Discharge_voltage : Single = 2.75
+	[OWExcludeBindings]
+	[ValueRange(1, 100 )]
+	Max_voltage : Single = 4.2
 	
 	[Name( 'Voltage(V)' )]
-    Voltage : TOWArduinoAnalogSinkPin
+	Voltage : TOWArduinoAnalogSinkPin
 	
 	[Name( 'Current(mA)' )]
     Current : TOWArduinoAnalogSinkPin
@@ -37,13 +68,7 @@ AuditorSystems
 	[Name( 'Charging' )]
     Charging : TOWArduinoDigitalSinkPin
 	
-	 [OWPrimaryPin]
-   [OWPinListPrimaryPinType( TOWArduinoAnalogFlexibleSourcePin )]
-	[OWAddPin( 'SOC (%)', TOWArduinoAnalogFlexibleSourcePin )]
-	[OWAddPin( 'Capacity used (mAh)', TOWArduinoAnalogFlexibleSourcePin )]
-	[OWAddPin( 'Capacity remain (mAh)', TOWArduinoAnalogFlexibleSourcePin )]
-	[OWAddPin( 'SOH (%)', TOWArduinoAnalogFlexibleSourcePin )]
-	OutputPins : TOWArduinoPinList
+	
 	
    
 	

@@ -8,106 +8,106 @@ AuditorSystems_ACS712.h
 #define _AUDITORSYSTEMS_SOC_h
 
 #include <AuditorSystems.h>
-#define VOLTAGE_6 voltage*voltage*voltage*voltage*voltage*voltage
-#define VOLTAGE_5 voltage*voltage*voltage*voltage*voltage
-#define VOLTAGE_4 voltage*voltage*voltage*voltage
-#define VOLTAGE_3 voltage*voltage*voltage
-#define VOLTAGE_2 voltage*voltage
+
 
 namespace AuditorSystems
 {
+	/*enum TArduinoSOCApproximation
+	{
+		asigmoidal, 
+		sigmoidal, 
+		linear
+	};*/
 	
 	template<
-		typename T_Battery_Type,
-		typename T_Capacity,
-		typename T_Enabled,
-		typename T_OutputPins_SOC,		
-		typename T_OutputPins_Capacity_used,
-		typename T_OutputPins_Capacity_remain,
-		typename T_OutputPins_SOH
-
-
-		
-		
+	typename T_Approximation,
+	typename T_Bat_SOC,
+	typename T_Bat_SOH,
+	typename T_Capacity,
+	typename T_Capacity_remain,
+	typename T_Capacity_used,
+	typename T_Discharge_voltage,
+	typename T_Enabled,
+	typename T_Max_voltage
 	
+
+
 	> class SOC :
-		public T_Battery_Type,
-		public T_Capacity,
-		public T_Enabled,
-		public T_OutputPins_SOC,
-		public T_OutputPins_Capacity_used,
-		public T_OutputPins_Capacity_remain,
-		public T_OutputPins_SOH
+	public T_Approximation,
+	public T_Bat_SOC,
+	public T_Bat_SOH,
+	public T_Capacity,
+	public T_Capacity_remain,
+	public T_Capacity_used,
+	public T_Discharge_voltage,
+	public T_Enabled,
+	public T_Max_voltage
+	
+
+
+
+
+
+
+
+
+
 		
 	{
-		
-	public:
-		_V_PROP_( Battery_Type )	
-	public:
-		_V_PROP_( Capacity )
-	public:
-		_V_PROP_( Enabled )
-
+	
 	public:	
-		_V_PIN_( OutputPins_SOC )
-	public:
-		_V_PIN_( OutputPins_Capacity_used )
-	public:
-		_V_PIN_( OutputPins_Capacity_remain )
-	public:
-		_V_PIN_( OutputPins_SOH )
+		_V_PROP_( Approximation )
+		_V_PROP_( Capacity )
+		_V_PIN_( Capacity_remain )
+		_V_PIN_( Capacity_used )
+		_V_PROP_( Discharge_voltage )
+		_V_PROP_( Enabled )
+		_V_PROP_( Max_voltage )
+		_V_PIN_( Bat_SOC )
+		_V_PIN_( Bat_SOH )
 	
 		
 	protected:
 		float old_val_soc;
 		float old_val_capacity,old_val_capacity_remain;
 		float old_val_soh;
-		bool ASOCConnected = T_OutputPins_SOC::GetPinIsConnected();
-		bool ACapacity_usedConnected = T_OutputPins_Capacity_used::GetPinIsConnected();
-		bool ACapacity_remainConnected = T_OutputPins_Capacity_remain::GetPinIsConnected();
-		bool ASOHConnected = T_OutputPins_SOH::GetPinIsConnected();
-		
+	
 	public:
 		
 		float voltage=0;
 		float current=0;
-		float soc,start_up_soc;
+		uint8_t soc,start_up_soc;
 		float soh;
 		float current_capacity,soh_capacity=0,current_capacity_remain;
 		int capacity=Capacity();
-		String bat=Battery_Type().GetValue();
+		
 		byte init_soc=0;
 		bool ready;
 		bool charging=false;
+		
 		unsigned long previousMillis = 0; 
 
 		const long interval = 1000; 
 
 	
-	public:
+    public: 
+		 uint8_t initial_soc(){
+			 uint8_t result;
+			if(Approximation()==0)result = 101 - (101 / pow(1 + pow(1.33 * (voltage - Discharge_voltage())/(Max_voltage() - Discharge_voltage()) ,4.5), 3)); //asigmoidal
+		
+			if(Approximation()==1)result = 105 - (105 / (1 + pow(1.724 * (voltage - Discharge_voltage())/(Max_voltage() - Discharge_voltage()), 5.5)));//sigmoidal normal
+			//result = 102 - (102 / (1 + pow(1.621 * (voltage - Discharge_voltage().GetValue())/(Max_voltage().GetValue() - Discharge_voltage().GetValue()), 8.1)));//sigmoidal fast
+			
+		
+		//else result = (voltage - Discharge_voltage()) * 100 / (Max_voltage() - Discharge_voltage());//linear mapping
+		//Serial.println("SOC: "+String(result));
+		
+			return result;
+		
 	
-		inline bool initial_soc(byte selection){
-		
-		switch(selection){
-		case 0:
-				soc=constrain((223483.7 - 292861.8*voltage + 153179.3*VOLTAGE_2 - 40005.46*VOLTAGE_3 + 5220.717*VOLTAGE_4 - 272.4359*VOLTAGE_5),0,100);
-				break;
-		case 1: 		
-				soc=constrain(( 373150.6 - 494536.1*voltage + 261651.2*VOLTAGE_2 - 69115.53*VOLTAGE_3 + 9118.59*VOLTAGE_4 - 480.7692*VOLTAGE_5),0,100);
-				break;
-		case 2:
-				soc=constrain(( -851986.4 + 1181858*voltage - 653229.7*VOLTAGE_2 + 179806.2*VOLTAGE_3 - 24647.44*VOLTAGE_4 + 1346.154*VOLTAGE_5),0,100);
-				break;
-		case 3:
-				soc=constrain(( -861712.3 + 1151443*voltage - 612614.8*VOLTAGE_2 + 162212.3*VOLTAGE_3 - 21376.75*VOLTAGE_4 + 1121.795*VOLTAGE_5),0,100);
-				break; 
-		default:
-				soc=0;
-				break;
 		}
-		return true;
-		
-		}
+	
+	
 	public:
 		inline void SystemLoopBegin()
 		{
@@ -115,46 +115,52 @@ namespace AuditorSystems
 			
 			
 			if(init_soc<=2){
-			
+			soc=initial_soc();
 		
-			if(bat=="Li-Ion")ready=initial_soc(0);	
-			if(bat=="NiCd")ready=initial_soc(1);	
-			if(bat=="CGR18650CH")ready=initial_soc(2);
-			if(bat=="AW-18650")ready=initial_soc(3);		
-			start_up_soc=soc;
+				
+			
 			}
 			unsigned long currentMillis = millis();
 			if (currentMillis - previousMillis >= interval) {
 		
 			previousMillis = currentMillis;
-			soc=soc-(current*0.000277778/capacity)*100;
+			if(charging==false&&current>500){
+					soc=soc-(current*0.000277778/capacity)*100;
+					
+			}
+			if(charging==false&&current<500){
+					soc=initial_soc();
+					
+			}
+			if(charging==true&&current>500)soc=soc+(current*0.000277778/capacity)*100;
+			else soc=initial_soc();
 			current_capacity+=current*0.000277778;
 			soh_capacity+=current*0.000277778;
-//if(voltage>=4.11&&charging==false)soh_capacity=0;
+
 		current_capacity_remain=capacity*(soc/100);
 			}
 		
 
-		//if(voltage<=3.45&&voltage>=3.4&&charging==false)soh=100*soh_capacity/capacity;
+	
 			
+			if(old_val_soc!=soc){
+		  old_val_soc=soc;
+			T_Bat_SOC::SetPinValue(soc);
 			
-		  
-			
-			
-			if( ASOCConnected &&old_val_soc!=soc){
-					T_OutputPins_SOC::SetPinValue(soc);
-					old_val_soc=soc;
-				}
-			if( ACapacity_usedConnected&&old_val_capacity!=current_capacity &&current_capacity!=0){
-					T_OutputPins_Capacity_used::SetPinValue(current_capacity);
+			}
+					
+					
+				
+			if( old_val_capacity!=current_capacity &&current_capacity!=0){
+					T_Capacity_used::SetPinValue(current_capacity);
 					old_val_capacity=current_capacity;
 				}
-			if( ACapacity_remainConnected&&old_val_capacity_remain!=current_capacity_remain){
-					T_OutputPins_Capacity_remain::SetPinValue(current_capacity_remain);
-					old_val_capacity_remain=current_capacity_remain;
-				}
-			if( ASOHConnected&&old_val_soh!=soh ){
-					T_OutputPins_SOH::SetPinValue(soh);
+			if( old_val_capacity_remain!=current_capacity_remain ){
+				old_val_capacity_remain=current_capacity_remain;
+					T_Capacity_remain::SetPinValue(current_capacity_remain);
+			}
+			if( old_val_soh!=soh ){
+					T_Bat_SOH::SetPinValue(soh);
 					old_val_soh=soh;
 					
 				}
@@ -166,20 +172,15 @@ namespace AuditorSystems
 		inline void SystemStart()
 		{
 				
-		 //T_OutputPins_SOC::SetPinValue();
-		 //T_OutputPins_Capacity::SetPinValue();
-		 //T_OutputPins_SOH::SetPinValue();
-		
-			//Serial.println(bat);
-			//Serial.println(capacity);
+		 
 			
-			
-		
 				
 		}
 		inline void Voltage_o_Receive( void *_Data )
 		{
+			
 			voltage = *(float * )_Data;
+			//soc=initial_soc();
 			init_soc++;
 			if(init_soc>3)init_soc=3;
 						

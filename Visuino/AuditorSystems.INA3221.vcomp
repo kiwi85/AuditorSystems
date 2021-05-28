@@ -12,7 +12,7 @@ AuditorSystems
   [ArduinoStart]
   [ArduinoLoopBegin]
    
-    +TArduinoAuditorSystemsINA3221 : TArduinoClockedEnableComponent
+    +TArduinoAuditorSystemsINA3221 : TArduinoClockedEnableFlexibleI2CComponent
 
    
     [ArduinoDirectCallPinTemplate( True )]
@@ -38,21 +38,12 @@ AuditorSystems
 	[OWAddPin( 'Power', TOWArduinoAnalogFlexibleSourcePin )]
 	CH3OutputPins : TOWArduinoPinList
 	
-	[OWExcludeBindings] // Remove to get Sink Pin
-	[DesignRange( 0, 255 )]
-    Address: Unsigned =65//0x401   
+	 [DesignRange( $40, $4F )]
+	Address = $41
 	
-	[OWExcludeBindings] // Remove to get Sink Pin
-	[DesignRange( 0, 255 )]
-    Shunt_CH1: Single =65//0x401   
-	
-	[OWExcludeBindings] // Remove to get Sink Pin
-	[DesignRange( 0, 255 )]
-    Shunt_CH2: Single =65//0x401   
-	
-	[OWExcludeBindings] // Remove to get Sink Pin
-	[DesignRange( 0, 255 )]
-    Shunt_CH3: Single =65//0x401   
+	[Name( 'Shunt Resistor (Ohms)' )]
+    [MinValue( 0.000001 )]
+    ShuntResistor : Single = 0.02
 	
 	
 		

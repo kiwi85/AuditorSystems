@@ -59,7 +59,7 @@ template <
 
     uint8_t SPL_CHIP_ADDRESS = (uint8_t)Address().GetValue();//1110111; 0x77; 119
     float local_pressure_set = local_pressure().GetValue();
-	
+	unsigned long lastmillis=0; 
 	void ReadData()
 		{
 			if( ! Enabled() )
@@ -576,8 +576,11 @@ template <
   public:
     inline void SystemLoopBegin()
     {
+		if (millis() - lastmillis >= 500)
+{  
+lastmillis = millis();     
      ReadData();
-
+}
     }
   public:
     inline void SystemInit()

@@ -76,10 +76,10 @@ namespace AuditorSystems
 		
 		float voltage=0;
 		float current=0;
-		uint8_t soc,start_up_soc;
+		float soc,start_up_soc;
 		float soh;
 		float current_capacity,soh_capacity=0,current_capacity_remain;
-		int capacity=Capacity();
+		int capacity=Capacity().GetValue();
 		
 		byte init_soc=0;
 		bool ready;
@@ -114,38 +114,35 @@ namespace AuditorSystems
 			if( ! Enabled() ) return;
 			
 			
-			if(init_soc<=2){
-			soc=initial_soc();
 		
-				
-			
-			}
 			unsigned long currentMillis = millis();
 			if (currentMillis - previousMillis >= interval) {
 		
 			previousMillis = currentMillis;
-			if(charging==false&&current>500){
-					soc=soc-(current*0.000277778/capacity)*100;
+			if(charging==false&&current>300){
+					soc=soc-(current*0.000277778/capacity)*100.0;
+					//Serial.println(soc);
 					
 			}
-			if(charging==false&&current<500){
+			else if(charging==false&&current<300){
 					soc=initial_soc();
 					
 			}
-			if(charging==true&&current>500)soc=soc+(current*0.000277778/capacity)*100;
+			else if(charging==true&&current>=300)soc=soc+(current*0.000277778/capacity)*100.0;
 			else soc=initial_soc();
 			current_capacity+=current*0.000277778;
 			soh_capacity+=current*0.000277778;
 
-		current_capacity_remain=capacity*(soc/100);
+		
+		
 			}
 		
-
+T_Capacity_remain::SetPinValue(capacity*(soc/100.0));
 	
 			
 			if(old_val_soc!=soc){
 		  old_val_soc=soc;
-			T_Bat_SOC::SetPinValue(soc);
+			T_Bat_SOC::SetPinValue((int)soc);
 			
 			}
 					
@@ -183,6 +180,9 @@ namespace AuditorSystems
 			//soc=initial_soc();
 			init_soc++;
 			if(init_soc>3)init_soc=3;
+				if(init_soc<=2){
+			soc=initial_soc();
+			}
 						
 		}
 		inline void Current_o_Receive( void *_Data )

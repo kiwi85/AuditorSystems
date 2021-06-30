@@ -1,7 +1,6 @@
 AuditorSystems
 //-----
 TArduinoMQTTcollection : TArduinoPersistentCollection;
-TArduinoWIFIcollection : TArduinoPersistentCollection;
 //------
 [ArduinoInclude( 'AuditorSystems_WIFIMQTT.h' )]
 //[ArduinoInclude( 'IOTAppStory.h','IOTAppStory-ESP','IOTAPPSTORY needs to be installed via library manager: https://github.com/iotappstory/ESP-Library')]
@@ -16,12 +15,7 @@ TArduinoWIFIcollection : TArduinoPersistentCollection;
 [ArduinoLoopBegin]
 [ComponentEditorEntriesDesign]
 +TArduinoAuditorSystemsWIFIMQTT : TArduinoEnableComponent
-[ArduinoExcludeCollectionItems]
-[ComponentEditorEntryDesign( 'Add &Elements ...' )]
-ConfigTopics : TArduinoMQTTcollection
-[ArduinoExcludeCollectionItems]
-[ComponentEditorEntryDesign( 'Add &Elements ...' )]
-WifiParameters : TArduinoWIFIcollection
+
 [OWExcludeBindings]
 [ValueRange( 0, 100 )]
 Modebutton : Unsigned=0
@@ -29,9 +23,10 @@ Modebutton : Unsigned=0
 DeviceName : String =WIFIMQTT-Test
 [OWExcludeBindings]
 [ValueRange( 1, 3600 )]
-[Name( 'Deep Sleep time (s)' )]
 deepsleep : Unsigned=60
-
+[ArduinoExcludeCollectionItems]
+[ComponentEditorEntryDesign( 'Add &Elements ...' )]
+ConfigTopics : TArduinoMQTTcollection
 //--------------------------------------	
  
 [OWPrimaryPin]
@@ -82,12 +77,18 @@ Unit_Of_Measurement : String=C
 Name : String=temperature
 [OWExcludeBindings]
 Icon : String=mdi:temperature-celsius
+[OWExcludeBindings]
+ValueJson : String=t
 ;
-[PersistentCollection( TArduinoWIFIcollection )]
-[ArduinoClass( 'AuditorSystems::WifiParameter' )]
-[CreateName( 'WifiParameter' )]
-[Name( 'WifiParameter' )]
-//[ParentImage( TArduinoTextBinaryPacketElement )]
+//--------------------------------------
+
+
+
+[PersistentCollection( TArduinoMQTTcollection )]
+[ArduinoClass( 'AuditorSystems::SubscriptionTopic' )]
+[CreateName( 'SubscriptionTopic' )]
+[Name( 'Subscription Topic' )]
+[ParentImage( TArduinoTextBinaryPacketElement )]
 [Category( TArduinoAuditorSystems )]
 [ArduinoInit]
 [ArduinoStart]
@@ -96,13 +97,9 @@ Icon : String=mdi:temperature-celsius
 [ArduinoOwnerTemplateType]
 [ArduinoOwnerReferenceTemplate]
 +TArduinoAuditorSystemsWIFIMQTT : TArduinoBasicNamedExludePersistent
+//VariableInputPin : TOWArduinoStringSinkPin
 [OWExcludeBindings]
-Name : String=server
+Subscribe_topic : String=/hello
 [OWExcludeBindings]
-Parameter : String='MQTT Server'
-[OWExcludeBindings]
-Value : String=adress_of_server
-[OWExcludeBindings]
-[ValueRange( 0, 100 )]
-Length : Unsigned=40
+TopicName : String=test
 ;

@@ -1,0 +1,38 @@
+AuditorSystems
+//-----
+ 
+
+  [ArduinoInclude( 'AuditorSystems_LTR381.h' )]
+  [ArduinoClass( 'AuditorSystems::LTR381' )]
+   [CreateName( 'LTR381' )]
+  [Name( 'LTR381 RGB-UV Light Sensor' )]
+  [Category( TArduinoAuditorSystems )]
+  //[ArduinoExcludeUnconnected]
+  [ArduinoStart]
+  [ArduinoLoopBegin]
+   [ArduinoPinNonConnectedAddEntry( ceLoopBegin )]
+    +TArduinoAuditorSystemsLTR381 :  TArduinoClockedEnableFlexibleI2CComponent
+    [ArduinoDirectCallPinTemplate( True )]
+    ClockInputPin
+     	    
+	[OWPrimaryPin]
+    ColorOutputPin : TOWArduinoColorSourcePin
+	UVOutputPin : TOWArduinoUnsignedSourcePin
+	
+	[OWExcludeBindings] // Remove to get Sink Pin
+	[ValueRange( 0, 255 )]
+    Address: Unsigned =83//0x53   
+	
+	
+	
+	
+	
+	
+		
+	
+   
+   	;
+//-----
+
+	
+;

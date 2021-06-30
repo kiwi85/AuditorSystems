@@ -2,16 +2,16 @@ AuditorSystems
 //-----
  
 
-  [ArduinoInclude( 'AuditorSystems_HDC1080.h' )]
-  [ArduinoClass( 'AuditorSystems::HDC1080' )]
-   [CreateName( 'HDC1080' )]
-  [Name( 'HDC1080 Humidity' )]
+  [ArduinoInclude( 'AuditorSystems_HDC2080.h' )]
+  [ArduinoClass( 'AuditorSystems::HDC2080' )]
+   [CreateName( 'HDC2080' )]
+  [Name( 'HDC2080 Humidity' )]
   [Category( TArduinoAuditorSystems )]
   [ArduinoExcludeUnconnected]
   [ArduinoStart]
   [ArduinoLoopBegin]
    
-    +TArduinoAuditorSystemsHDC1080 : TArduinoClockedEnableFlexibleI2CComponent
+    +TArduinoAuditorSystemsHDC2080 : TArduinoClockedEnableFlexibleI2CComponent
 
    
     [ArduinoDirectCallPinTemplate( True )]
@@ -22,7 +22,7 @@ AuditorSystems
     [OWPinListPrimaryPinType( TOWArduinoAnalogFlexibleSourcePin )]
 	[OWAddPin( 'Humidity', TOWArduinoAnalogFlexibleSourcePin )]
 	[OWAddPin( 'Temperature', TOWArduinoAnalogFlexibleSourcePin )]
-	HDC1080OutputPins : TOWArduinoPinList
+	HDC2080OutputPins : TOWArduinoPinList
 	
 	[OWExcludeBindings] // Remove to get Sink Pin
 	[DesignRange( $40, $4F )]

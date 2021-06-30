@@ -1,0 +1,90 @@
+AuditorSystems
+//-----
+TArduinoIOTAPPSTORYcollection : TArduinoPersistentCollection;
+//------
+[ArduinoInclude( 'AuditorSystems_IOTAPPSTORY.h' )]
+[ArduinoInclude( 'IOTAppStory.h','IOTAppStory-ESP','IOTAPPSTORY needs to be installed via library manager: https://github.com/iotappstory/ESP-Library')]
+//[ArduinoInclude( 'ArduinoJson.h','ArduinoJson','ArduinoJson needs to be installed via library manager: https://github.com/bblanchon/ArduinoJson')]
+[ArduinoClass( 'AuditorSystems::IOTAPPSTORY' )]
+[CreateName( 'IOTAPPSTORY' )]
+[Name( 'IoTAppstory' )]
+[Category( TArduinoAuditorSystems )]
+[ArduinoDeclaredClass]
+
+[ArduinoStart]
+[ArduinoLoopBegin]
+[ComponentEditorEntriesDesign]
++TArduinoAuditorSystemsIOTAPPSTORY : TArduinoEnableComponent
+[ArduinoExcludeCollectionItems]
+[ComponentEditorEntryDesign( 'Add &Elements ...' )]
+Variables : TArduinoIOTAPPSTORYcollection
+
+[OWExcludeBindings]
+[ValueRange( 0, 100 )]
+Modebutton : Unsigned=0
+[OWExcludeBindings]
+DeviceName : String =IOTAPPSTORY-Test
+[OWExcludeBindings]
+[ValueRange( 0, 59 )]
+updInt : Unsigned=5
+
+//--------------------------------------	
+ 
+[OWPrimaryPin]
+[OWPinListPrimaryPinType( TOWArduinoStringSourcePin )]
+[OWAddPin( 'LocalIP', TOWArduinoStringSourcePin )]
+[OWAddPin( 'MAC', TOWArduinoStringSourcePin )]
+[OWAddPin( 'DeviceName', TOWArduinoStringSourcePin )]
+[OWAddPin( 'RSSI', TOWArduinoIntegerSourcePin)]
+[OWAddPin( 'Status', TOWArduinoIntegerSourcePin)]
+[OWAddPin( 'EEPROMVars', TOWArduinoStringSourcePin )]
+[OWAddPin( 'OTAProgress', TOWArduinoIntegerSourcePin )]
+Network : TOWArduinoPinList
+;
+//--------------------------------------
+
+
+
+[PersistentCollection( TArduinoIOTAPPSTORYcollection )]
+[ArduinoClass( 'AuditorSystems::TxtVar' )]
+[CreateName( 'TxtVar' )]
+[Name( 'Text_Variable' )]
+[ParentImage( TArduinoTextBinaryPacketElement )]
+[Category( TArduinoAuditorSystems )]
+[ArduinoInit]
+[ArduinoStart]
+[ArduinoLoopBegin]
+[ArduinoDeclaredClass]
+[ArduinoOwnerTemplateType]
+[ArduinoOwnerReferenceTemplate]
++TArduinoAuditorSystemsIOTAPPSTORY : TArduinoBasicNamedExludePersistent
+//VariableInputPin : TOWArduinoStringSinkPin
+[OWExcludeBindings]
+Variable : String='IAS-VAR'
+[OWExcludeBindings]
+VariableName : String='Var-name'
+[OWExcludeBindings]
+[ValueRange( 0, 59 )]
+Length : Unsigned=16
+;
+[PersistentCollection( TArduinoIOTAPPSTORYcollection )]
+[ArduinoClass( 'AuditorSystems::IntVar' )]
+[CreateName( 'IntVar' )]
+[Name( 'Int_Variable' )]
+//[ParentImage( TArduinoTextBinaryPacketElement )]
+[Category( TArduinoAuditorSystems )]
+[ArduinoInit]
+[ArduinoStart]
+[ArduinoLoopBegin]
+[ArduinoDeclaredClass]
+[ArduinoOwnerTemplateType]
+[ArduinoOwnerReferenceTemplate]
++TArduinoAuditorSystemsIOTAPPSTORY : TArduinoBasicNamedExludePersistent
+[OWExcludeBindings]
+Variable : Integer=255
+[OWExcludeBindings]
+VariableName : String='Var-name'
+[OWExcludeBindings]
+[ValueRange( 0, 100 )]
+Length : Unsigned=8
+;

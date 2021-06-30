@@ -6,13 +6,13 @@ AuditorSystems_ACS712.h
 
 #ifndef _AUDITORSYSTEMS_HDC1080_h
 #define _AUDITORSYSTEMS_HDC1080_h
-#include "ClosedCube_HDC1080.h"
+#include <Wire.h>
 #include <AuditorSystems.h>
 
 namespace AuditorSystems
 {
-	ClosedCube_HDC1080 hdc1080;
-	template<
+		template<
+		typename T_I2C, T_I2C &C_I2C,
 		typename T_Address,
 		typename T_ClockInputPin_o_IsConnected,
 		typename T_Enabled,
@@ -43,8 +43,67 @@ namespace AuditorSystems
 	public:
 		_V_PROP_( ClockInputPin_o_IsConnected )
 	
-	
-	
+	protected:
+		uint16_t temperatureRaw;
+		uint16_t humidityRaw;
+	public:
+	uint8_t adr=Address().GetValue();
+		void config(){
+
+			temperatureRaw=0;
+			humidityRaw=0;
+
+			//config the temp sensor to read temp then humidity in one transaction
+			//config the resolution to 14 bits for temp & humidity
+
+			writeRegister(0x02,0x10);
+
+		}
+
+		void writeRegister(uint8_t address, uint16_t value){
+			C_I2C.beginTransmission(adr);
+			C_I2C.write(address);
+			C_I2C.write(value);
+			C_I2C.endTransmission();
+		}
+
+
+
+		void readTempHumid(){
+			//set pointer register
+			C_I2C.beginTransmission(adr);
+			C_I2C.write(0x00);
+			C_I2C.endTransmission();
+			delay(15);
+			C_I2C.requestFrom(adr, 4);
+			temperatureRaw = temperatureRaw << 8 | C_I2C.read();
+			temperatureRaw = temperatureRaw << 8 | C_I2C.read();
+			humidityRaw = humidityRaw << 8 | C_I2C.read();
+			humidityRaw = humidityRaw << 8 | C_I2C.read();
+
+		}
+
+		//returns temp in celcius
+		float getTemp(){
+
+			// (rawTemp/2^16)*165 - 40
+			return ( (float)temperatureRaw )*165/65536 - 40;
+
+		}
+
+		float getRelativeHumidity(){
+
+			//(rawHumidity/2^16)*100
+			return ( (float)humidityRaw )*100/65536;
+		}
+
+		float* getTempHumid(float* tempHumid){
+
+			*tempHumid = getTemp();
+			*(tempHumid+1) = getRelativeHumidity();
+			return tempHumid;
+
+		}
 
 	public:
 		void ClockInputPin_o_Receive( void *_Data )
@@ -59,9 +118,10 @@ namespace AuditorSystems
 		inline void SystemLoopBegin()
 		{
 			if( ! Enabled() ) return;
+			readTempHumid();
 		
-		T_HDC1080OutputPinsHumidity::SetPinValue(hdc1080.readHumidity());
-		T_HDC1080OutputPinsTemperature::SetPinValue(hdc1080.readTemperature());	 
+		T_HDC1080OutputPinsHumidity::SetPinValue(getRelativeHumidity());
+		T_HDC1080OutputPinsTemperature::SetPinValue(getTemp());	 
 		
 		}
 	public:
@@ -73,7 +133,7 @@ namespace AuditorSystems
 					// Default settings: 
 	//  - Heater off
 	//  - 14 bit Temperature and Humidity Measurement Resolutions
-	hdc1080.begin(Address());
+	config();
 
 	//Serial.print("Manufacturer ID=0x");
 	//Serial.println(hdc1080.readManufacturerId(), HEX); // 0x5449 ID of Texas Instruments
